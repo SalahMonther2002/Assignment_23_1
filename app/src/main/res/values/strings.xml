@@ -7,5 +7,5 @@
     <string name="a" />
     <string name="number_of_your_task">Please just put the number of your task</string>
     <string name="discriptionForChangeing">And you can Change the status of your tasks ,So when you finish a task you can make its done and removing the task from the due task list, great!!!</string>
-    <string name="make_it_done">Make it Done !</string>
+    <string name="make_it_done">Change to Done !</string>
 </resources>

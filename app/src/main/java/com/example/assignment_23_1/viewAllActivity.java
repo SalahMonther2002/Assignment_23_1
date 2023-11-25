@@ -6,8 +6,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -32,23 +34,27 @@ due tasks, with the aim of user convenience when using the app.
 
 public class viewAllActivity extends AppCompatActivity {
 
-    private TextView txtTask;
+    private ListView listView;
     private EditText txt6;
     private Button btn2;
 
     private SharedPreferences prefs;
     private SharedPreferences.Editor editor;
-    protected static ArrayList<Task> newTaskList =new ArrayList<>();
+
+
 
     int numOfTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_view_all);
+
         setupViews();
         setupSharedPrefs();
         checkPrefs();
+
 
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,18 +64,18 @@ public class viewAllActivity extends AppCompatActivity {
                 if(numOfTask > 0 & numOfTask <= addNewActivity.taskList.size()) {
 
                     addNewActivity.taskList.remove((numOfTask - 1));
+
                     Gson gson = new Gson();
                     String tasksString = gson.toJson(addNewActivity.taskList);
 
                     editor.putString(addNewActivity.DIS, tasksString);
                     editor.commit();
 
-                    txtTask.setText("");
-                    for (int i = 0; i < addNewActivity.taskList.size(); i++) {
-                        txtTask.append((i + 1) + ". " + addNewActivity.taskList.get(i).getDiscription() + "\n");
-                    }
+                    ArrayAdapter<Task> listAdapter = new ArrayAdapter<> ( getApplicationContext(), android.R.layout.simple_list_item_1, addNewActivity.taskList );
+                    listView.setAdapter(listAdapter);
 
                 }
+
             }
 
 
@@ -77,21 +83,21 @@ public class viewAllActivity extends AppCompatActivity {
     }
 
     private void checkPrefs() {
+
         Gson gson = new Gson();
 
         String str = prefs.getString(addNewActivity.DIS, "");
 
         if( !str.equals("") ){
 
+
             addNewActivity.taskList = gson.fromJson(str, new TypeToken<ArrayList<Task>>(){}.getType());
 
-            for(int i =0 ; i < addNewActivity.taskList.size(); i++){
-                txtTask.append( (i+1) + ". " + addNewActivity.taskList.get(i).getDiscription() +"\n");
-            }
+            ArrayAdapter<Task> listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, addNewActivity.taskList  );
+            listView.setAdapter(listAdapter);
+
         }
-        else{
-            txtTask.setText("No tasks found");
-        }
+
 
     }
     private void setupSharedPrefs() {
@@ -100,8 +106,8 @@ public class viewAllActivity extends AppCompatActivity {
         editor = prefs.edit();
     }
     private void setupViews() {
+        listView =(ListView) findViewById(R.id.listV2);
 
-        txtTask = findViewById(R.id.txt2);
         txt6 = findViewById(R.id.txt6);
         btn2 = findViewById(R.id.btn2);
     }
