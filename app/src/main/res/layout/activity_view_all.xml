@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ABD4E6"
+    android:orientation="vertical"
+    android:padding="15dp"
+    tools:context=".viewAllActivity">
+
+    <TextView
+        android:id="@+id/txt1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/akaya_telivigala"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="20dp"
+        android:text="@string/to_do"
+        android:textSize="25sp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="238dp"
+        android:layout_marginTop="10dp">
+
+
+        <TextView
+            android:id="@+id/txt2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:lineSpacingMultiplier="1.5"
+            android:padding="8dp"
+            android:text="@string/a"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/txt7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/akaya_telivigala"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="20dp"
+        android:text="@string/discriptionForChangeing"
+        android:textSize="22sp" />
+
+
+    <EditText
+        android:id="@+id/txt6"
+        android:layout_width="345dp"
+        android:layout_height="61dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="@string/number_of_your_task"
+        android:inputType="number"
+        android:padding="15dp" />
+
+    <Button
+        android:id="@+id/btn2"
+        android:layout_width="197dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:text="@string/make_it_done" />
+
+
+</LinearLayout>

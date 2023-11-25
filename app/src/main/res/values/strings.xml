@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Assignment_23_1</string>
+    <string name="this_app_to_mange_your_tasks">This App to mange your tasks !!</string>
+    <string name="write_your_task_here">Write your Task here</string>
+    <string name="add">Add</string>
+    <string name="to_do">This is your all due task that you want to do !!</string>
+    <string name="a" />
+    <string name="number_of_your_task">Please just put the number of your task</string>
+    <string name="discriptionForChangeing">And you can Change the status of your tasks ,So when you finish a task you can make its done and removing the task from the due task list, great!!!</string>
+    <string name="make_it_done">Make it Done !</string>
+</resources>
