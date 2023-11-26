@@ -44,7 +44,6 @@ public class addNewActivity extends AppCompatActivity {
 
                      taskList.add(new Task( disText.getText().toString()));
 
-
                      Gson gson = new Gson();
                      String tasksString = gson.toJson(taskList);
 

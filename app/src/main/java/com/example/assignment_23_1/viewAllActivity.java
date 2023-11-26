@@ -65,11 +65,17 @@ public class viewAllActivity extends AppCompatActivity {
 
                     addNewActivity.taskList.remove((numOfTask - 1));
 
+                    //here we must update the data in the shared pref
                     Gson gson = new Gson();
                     String tasksString = gson.toJson(addNewActivity.taskList);
 
                     editor.putString(addNewActivity.DIS, tasksString);
                     editor.commit();
+                    //List numbering to facilitate use of the app.
+                    for(int i=0 ; i<addNewActivity.taskList.size();i++) {
+                        addNewActivity.taskList.get(i).setDiscription( (i+1) + "  - " + addNewActivity.taskList.get(i).getDiscription());
+
+                    }
 
                     ArrayAdapter<Task> listAdapter = new ArrayAdapter<> ( getApplicationContext(), android.R.layout.simple_list_item_1, addNewActivity.taskList );
                     listView.setAdapter(listAdapter);
@@ -92,6 +98,10 @@ public class viewAllActivity extends AppCompatActivity {
 
 
             addNewActivity.taskList = gson.fromJson(str, new TypeToken<ArrayList<Task>>(){}.getType());
+            //List numbering to facilitate use of the app.
+            for(int i=0 ; i<addNewActivity.taskList.size();i++) {
+                addNewActivity.taskList.get(i).setDiscription( (i+1) + " - " + addNewActivity.taskList.get(i).getDiscription());
+            }
 
             ArrayAdapter<Task> listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, addNewActivity.taskList  );
             listView.setAdapter(listAdapter);
