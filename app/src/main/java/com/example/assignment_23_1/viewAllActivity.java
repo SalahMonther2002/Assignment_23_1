@@ -73,7 +73,7 @@ public class viewAllActivity extends AppCompatActivity {
                     editor.commit();
                     //List numbering to facilitate use of the app.
                     for(int i=0 ; i<addNewActivity.taskList.size();i++) {
-                        addNewActivity.taskList.get(i).setDiscription( (i+1) + "  - " + addNewActivity.taskList.get(i).getDiscription());
+                        addNewActivity.taskList.get(i).setDiscription( (i+1) + "  ` " + addNewActivity.taskList.get(i).getDiscription());
 
                     }
 
@@ -100,7 +100,7 @@ public class viewAllActivity extends AppCompatActivity {
             addNewActivity.taskList = gson.fromJson(str, new TypeToken<ArrayList<Task>>(){}.getType());
             //List numbering to facilitate use of the app.
             for(int i=0 ; i<addNewActivity.taskList.size();i++) {
-                addNewActivity.taskList.get(i).setDiscription( (i+1) + " - " + addNewActivity.taskList.get(i).getDiscription());
+                addNewActivity.taskList.get(i).setDiscription( (i+1) + " ` " + addNewActivity.taskList.get(i).getDiscription());
             }
 
             ArrayAdapter<Task> listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, addNewActivity.taskList  );

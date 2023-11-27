@@ -32,6 +32,6 @@ public class Task {
     @Override
     public String toString(){
         //Since the listview takes the data from the testing() method, I use some regular expressions.
-      return  discription.replaceAll("-.*-","");
+      return  discription.replaceAll("`.*`","");
     }
 }
