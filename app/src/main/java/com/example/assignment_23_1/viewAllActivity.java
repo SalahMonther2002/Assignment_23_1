@@ -23,7 +23,9 @@ in the solution, and I hope it will be in the desired form: The first and third 
 focus on the word due, and therefore any task in which the special status has been changed will be deleted
 and not displayed in the due task list. This is the logic (i.e. a task that has been completed.
 Its work should not be displayed in the tasks that we want to do).
+
 ----> In my opinion, any task whose work has been completed has no need to remain <----
+----> There is no requirement (1-7) for us to show him completed tasks !!! <----
 But I adhered to all the Reqs in the Assignment and applied them
 
 
