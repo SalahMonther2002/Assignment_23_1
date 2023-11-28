@@ -24,9 +24,13 @@ focus on the word due, and therefore any task in which the special status has be
 and not displayed in the due task list. This is the logic (i.e. a task that has been completed.
 Its work should not be displayed in the tasks that we want to do).
 ----> In my opinion, any task whose work has been completed has no need to remain <----
+But I adhered to all the Reqs in the Assignment and applied them
+
 
 So the main thing to take care of when building the application in general: is that it is as easy to use for the
 user as possible, and that it does not require a lot of concentration from the user.
+
+Note : There is no requirement for us to show him the completed tasks, he just asked us to save them in the Shared pref
 
 I have added the feature of changing the task status upon completion in the same activity that displays the
 due tasks, with the aim of user convenience when using the app.
@@ -40,9 +44,8 @@ public class viewAllActivity extends AppCompatActivity {
 
     private SharedPreferences prefs;
     private SharedPreferences.Editor editor;
-
-
-
+    protected static ArrayList<Task> doneTaskList = new ArrayList<>();
+    protected static final String DONEDIS = "DONEDIS";
     int numOfTask;
 
     @Override
@@ -62,30 +65,38 @@ public class viewAllActivity extends AppCompatActivity {
                 String str = txt6.getText().toString();
                  numOfTask = Integer.parseInt(str);
                 if(numOfTask > 0 & numOfTask <= addNewActivity.taskList.size()) {
+                    //this list for done tasks to save it in shared pref , Req # 7
+                    doneTaskList.add(addNewActivity.taskList.get(numOfTask - 1));
 
                     addNewActivity.taskList.remove((numOfTask - 1));
 
-                    //here we must update the data in the shared pref
                     Gson gson = new Gson();
                     String tasksString = gson.toJson(addNewActivity.taskList);
 
                     editor.putString(addNewActivity.DIS, tasksString);
                     editor.commit();
                     //List numbering to facilitate use of the app.
-                    for(int i=0 ; i<addNewActivity.taskList.size();i++) {
-                        addNewActivity.taskList.get(i).setDiscription( (i+1) + "  ` " + addNewActivity.taskList.get(i).getDiscription());
+                    for (int i = 0; i < addNewActivity.taskList.size(); i++) {
+                        addNewActivity.taskList.get(i).setDiscription((i + 1) + "  ` " + addNewActivity.taskList.get(i).getDiscription());
 
                     }
 
-                    ArrayAdapter<Task> listAdapter = new ArrayAdapter<> ( getApplicationContext(), android.R.layout.simple_list_item_1, addNewActivity.taskList );
+                    ArrayAdapter<Task> listAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, addNewActivity.taskList);
                     listView.setAdapter(listAdapter);
 
                 }
-
             }
 
 
         });
+
+        //Save the done tasks in Shared Pref , Req # 7
+        Gson gson = new Gson();
+        String DonetasksString = gson.toJson(doneTaskList);
+
+        editor.putString(DONEDIS, DonetasksString);
+        editor.commit();
+
     }
 
     private void checkPrefs() {
