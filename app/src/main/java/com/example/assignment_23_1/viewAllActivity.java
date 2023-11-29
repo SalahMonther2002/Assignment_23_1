@@ -36,9 +36,12 @@ Note : There is no requirement for us to show him the completed tasks, he just a
 
 I have added the feature of changing the task status upon completion in the same activity that displays the
 due tasks, with the aim of user convenience when using the app.
+
+The app has a large test cases.
  */
 
 public class viewAllActivity extends AppCompatActivity {
+
 
     private ListView listView;
     private EditText txt6;
@@ -49,7 +52,7 @@ public class viewAllActivity extends AppCompatActivity {
     protected static ArrayList<Task> doneTaskList = new ArrayList<>();
     protected static final String DONEDIS = "DONEDIS";
     int numOfTask;
-
+    private  TextView txt20;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,28 +68,33 @@ public class viewAllActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String str = txt6.getText().toString();
-                 numOfTask = Integer.parseInt(str);
-                if(numOfTask > 0 & numOfTask <= addNewActivity.taskList.size()) {
-                    //this list for done tasks to save it in shared pref , Req # 7
-                    doneTaskList.add(addNewActivity.taskList.get(numOfTask - 1));
+                if (!str.isEmpty()) {
+                    numOfTask = Integer.parseInt(str);
+                    if (numOfTask > 0 & numOfTask <= addNewActivity.taskList.size()) {
+                        //this list for done tasks to save it in shared pref , Req # 7
+                        doneTaskList.add(addNewActivity.taskList.get(numOfTask - 1));
 
-                    addNewActivity.taskList.remove((numOfTask - 1));
+                        addNewActivity.taskList.remove((numOfTask - 1));
 
-                    Gson gson = new Gson();
-                    String tasksString = gson.toJson(addNewActivity.taskList);
+                        Gson gson = new Gson();
+                        String tasksString = gson.toJson(addNewActivity.taskList);
 
-                    editor.putString(addNewActivity.DIS, tasksString);
-                    editor.commit();
-                    //List numbering to facilitate use of the app.
-                    for (int i = 0; i < addNewActivity.taskList.size(); i++) {
-                        addNewActivity.taskList.get(i).setDiscription((i + 1) + "  ` " + addNewActivity.taskList.get(i).getDiscription());
+                        editor.putString(addNewActivity.DIS, tasksString);
+                        editor.commit();
+                        //List numbering to facilitate use of the app.
+                        for (int i = 0; i < addNewActivity.taskList.size(); i++) {
+                            addNewActivity.taskList.get(i).setDiscription((i + 1) + "  ` " + addNewActivity.taskList.get(i).getDiscription());
 
-                    }
+                        }
 
-                    ArrayAdapter<Task> listAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, addNewActivity.taskList);
-                    listView.setAdapter(listAdapter);
+                        ArrayAdapter<Task> listAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, addNewActivity.taskList);
+                        listView.setAdapter(listAdapter);
 
-                }
+                        txt20.setText("The change you made was successful");
+                    } else txt20.setText("Wrong!!");
+
+                }else txt20.setText("Wrong!!");
+
             }
 
 
@@ -133,6 +141,7 @@ public class viewAllActivity extends AppCompatActivity {
 
         txt6 = findViewById(R.id.txt6);
         btn2 = findViewById(R.id.btn2);
+        txt20= findViewById(R.id.txt20);
     }
 
 
